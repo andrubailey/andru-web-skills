@@ -1,0 +1,11 @@
+{
+  "name": "andru-skills",
+  "owner": { "name": "Andru Bailey" },
+  "plugins": [
+    {
+      "name": "andru-web-skills",
+      "source": "./",
+      "description": "Framer and web project skills: launch QA, client review rounds, content intake, redirect mapping."
+    }
+  ]
+}
