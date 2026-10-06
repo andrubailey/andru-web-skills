@@ -25,6 +25,9 @@ To work on the skills locally, point the marketplace at the clone instead:
 | `framer-review-round` | Turns a client feedback round into a triaged change list, applies the safe changes, flags scope creep, drafts the reply |
 | `framer-content-intake` | Turns raw client material into a page-by-page content plan plus a specific list of what is still missing |
 | `framer-redirect-map` | Builds the old-URL to new-URL 301 map for a rebuild, ready to paste into Framer redirects |
+| `builder-site-teardown` | Evidence pass over a builder's web presence against a fixed rubric: observations, measurements, screenshots, severity per dimension |
+| `craft-audit-prep` | Builds the Craft Audit prep brief: business snapshot, competitors, the three things drafted in his language, and the ninety minute run sheet |
+| `blueprint-qa` | Checks a drafted blueprint against its nine sections, layout rules, pricing and voice. Fixes the mechanical, flags the judgment |
 
 ## Editing
 
