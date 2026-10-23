@@ -35,7 +35,7 @@ Open the home page and contact page in the built-in browser and confirm one GA4 
 node qa/tools/lighthouse.mjs qa/key-pages.txt --psi --runs 3
 ```
 
-PageSpeed Insights runs on Google's servers against the live CDN, so this is the score of record. If the PSI quota is used up and there is no `PSI_API_KEY`, use local Lighthouse and say so in the report.
+PageSpeed Insights runs on Google's servers against the live CDN, so this is the score of record. Expect production to differ from the preview where tracking only loads in production (analytics, ad pixels): compare the two tables and name the script behind any drop. If the PSI quota is used up and there is no `PSI_API_KEY`, use local Lighthouse and say so in the report.
 
 ## 6. Walk Andru through submissions
 

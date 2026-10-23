@@ -171,6 +171,8 @@ The checklist of record for `site-launch-qa`. Every finding in a report uses an 
 | I9 | Long cache headers on hashed assets and fonts | | P | Pre | Auto |
 | I10 | Lighthouse Accessibility, Best Practices and SEO on every key page | 100 each | H, gates launch | Pre, Day | Auto when mechanical |
 
+Ad pixels only load in production, so a preview can score 100 and production less. The Meta Pixel's third-party `fr` cookie alone caps Best Practices at about 79 and adds load time. If the client runs Meta ads, either load the pixel only on the ad landing pages or record an accepted exception in `qa/LAUNCH-QA.md`; never remove a pixel without asking, because ads depend on it.
+
 ## J. Accessibility
 
 | ID | Check | Sev | Phase | Fix |
