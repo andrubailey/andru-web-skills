@@ -126,7 +126,7 @@ Everything else goes into one numbered list, sent once, after the audit. Group b
 - The robots.txt AI crawler policy (default: allow all, crawlers named explicitly)
 - Anything touching the client's CMS content: drafted alt text for Sanity images, filled SEO fields, deleting test documents, publishing drafts
 
-Andru answers by number. Apply what he approves. Code changes go on the branch. Sanity content changes go through a script in `qa/tools/` run with `npx sanity exec <script> --with-user-token`, which patches only the approved fields and prints what it changed. Anything for the client goes under "Needs client input" in the report, phrased so Andru can forward it.
+Andru answers by number. Apply what he approves. Code changes go on the branch. Sanity content is different: the preview and the live site read the same dataset, and publishing usually rebuilds production, so an approved content change goes live the moment it is written, branch or not. Before the first content write, say that plainly and get a yes for the live change (on a site that is not live yet this is harmless; on a live one it is a production change). Sanity content changes go through a script in `qa/tools/` run with `npx sanity exec <script> --with-user-token`, which patches only the approved fields and prints what it changed. Anything for the client goes under "Needs client input" in the report, phrased so Andru can forward it.
 
 ## 8. Report, client summary and state
 

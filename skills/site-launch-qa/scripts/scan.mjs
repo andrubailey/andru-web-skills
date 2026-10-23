@@ -135,12 +135,15 @@ for (const name of browsers) {
         focus = { stops: [], noIndicator: [] };
         for (let i = 0; i < 15; i++) {
           await page.keyboard.press('Tab');
-          const f = await page.evaluate(() => {
+          // Focus styles often transition (border or shadow over 0.2s), so read after they settle
+          await page.waitForTimeout(400);
+          const f = await page.evaluate(async () => {
             const el = document.activeElement;
             if (!el || el === document.body) return null;
             const read = () => { const s = getComputedStyle(el); return [s.outlineStyle !== 'none' ? s.outlineWidth + s.outlineColor : '', s.boxShadow, s.borderColor, s.backgroundColor, s.color, s.textDecorationLine].join('|'); };
             const focused = read();
             el.blur();
+            await new Promise(r => setTimeout(r, 400));
             const blurred = read();
             el.focus({ focusVisible: true });
             const s = getComputedStyle(el);
