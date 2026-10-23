@@ -1,0 +1,6 @@
+schema_version: "1.1"
+name: flags-missing-redirect
+expected_outcome: |
+  The report tests every old URL in qa/old-urls.txt, flags /our-homes returning 404 as a Blocker, proposes a permanent redirect to /homes/ on the approval list (redirects need approval), confirms the other two old URLs redirect correctly, and does not call the site ready.
+context:
+  scaffold_script: place-files.sh

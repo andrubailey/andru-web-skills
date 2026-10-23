@@ -1,0 +1,14 @@
+{
+  "name": "ridgeline",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "astro build",
+    "preview": "node serve.mjs"
+  },
+  "dependencies": {
+    "astro": "^7.4.0",
+    "@astrojs/sitemap": "^3.6.0",
+    "@astrojs/vercel": "^9.0.0"
+  }
+}

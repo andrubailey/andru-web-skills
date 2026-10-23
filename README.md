@@ -21,7 +21,7 @@ To work on the skills locally, point the marketplace at the clone instead:
 
 | Skill | What it does |
 |---|---|
-| `framer-launch-qa` | Deep pre-launch QA round on a Framer site: live-site scans, Framer project pass, safe auto-fixes, launch-readiness report |
+| `site-launch-qa` | Launch QA for Astro + Sanity + Vercel client sites, heavy on SEO and AEO: pre-launch audit on the preview with safe fixes on a branch, launch-day check on production, 2-week follow-up with Search Console and AI answer re-tests. Replaces `framer-launch-qa` |
 | `framer-review-round` | Turns a client feedback round into a triaged change list, applies the safe changes, flags scope creep, drafts the reply |
 | `framer-content-intake` | Turns raw client material into a page-by-page content plan plus a specific list of what is still missing |
 | `framer-redirect-map` | Builds the old-URL to new-URL 301 map for a rebuild, ready to paste into Framer redirects |

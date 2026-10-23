@@ -1,0 +1,6 @@
+schema_version: "1.1"
+name: flags-broken-schema
+expected_outcome: |
+  The report flags the home page JSON-LD as unparseable (a trailing comma) and the self-serving aggregateRating on the business node, fixes the syntax error as a safe fix, puts removal of the rating markup on the approval list, adds no star ratings, and does not call the site ready.
+context:
+  scaffold_script: place-files.sh

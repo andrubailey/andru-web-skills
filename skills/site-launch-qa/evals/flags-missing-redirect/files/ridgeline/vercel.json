@@ -1,0 +1,14 @@
+{
+  "redirects": [
+    {
+      "source": "/portfolio",
+      "destination": "/homes/",
+      "permanent": true
+    },
+    {
+      "source": "/contact-us",
+      "destination": "/contact/",
+      "permanent": true
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+import type {APIRoute} from 'astro'
+
+// Same robots.txt everywhere
+export const GET: APIRoute = () => new Response(`User-agent: *
+Allow: /
+
+User-agent: OAI-SearchBot
+User-agent: ChatGPT-User
+User-agent: GPTBot
+User-agent: Claude-SearchBot
+User-agent: Claude-User
+User-agent: ClaudeBot
+User-agent: PerplexityBot
+User-agent: Perplexity-User
+User-agent: Google-Extended
+User-agent: Applebot-Extended
+Allow: /
+
+Sitemap: https://ridgelinehomes.test/sitemap-index.xml
+`, {headers: {'Content-Type': 'text/plain'}})

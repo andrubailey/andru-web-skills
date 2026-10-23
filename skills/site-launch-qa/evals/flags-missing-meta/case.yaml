@@ -1,0 +1,6 @@
+schema_version: "1.1"
+name: flags-missing-meta
+expected_outcome: |
+  The report flags that /homes/the-ridge-house/ has no meta description and shares the home page's title, drafts a new title and description in Andru's voice for approval instead of writing them into the site, and does not call the site ready to launch.
+context:
+  scaffold_script: place-files.sh
