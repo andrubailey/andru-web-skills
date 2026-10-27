@@ -30,6 +30,7 @@ No em dashes in any of these. Every finding names the page, the breakpoint (and 
 | Zero schema errors | |
 | Zero broken links | |
 | Zero console errors | |
+| Smooth scrolling on every key page, 1440 and 390 (no frame over 12.5ms at 120Hz) | PASS / FAIL ({pages}) |
 | Unique title and description on every indexable page | |
 | Zero open Blocker and High | |
 
@@ -37,6 +38,13 @@ No em dashes in any of these. Every finding names the page, the breakpoint (and 
 
 | Page | Perf | A11y | Best Pr. | SEO | LCP | CLS | TBT |
 |---|---|---|---|---|---|---|---|
+
+## Lightness (real Chrome, wheel scroll, tracking {loaded / not loaded on the preview})
+
+| Page | Width | Slow frames | Worst | Own JS | CSS | Fonts | Third-party JS | Before scroll | Idle recalcs |
+|---|---|---|---|---|---|---|---|---|---|
+
+{Every slow frame with its cause, and what was done about it.}
 
 ## SEO and AEO scorecard
 

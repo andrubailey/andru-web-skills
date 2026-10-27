@@ -27,6 +27,7 @@ These protect the client, Andru's reputation and the live site. Each one has bit
 - **Secrets stay secret.** Never print a token. The preview bypass secret is only ever sent to the preview's own host (the scripts handle this). Content edits use `--with-user-token`, so no Sanity token is stored.
 - **No em dashes** anywhere: site copy, alt text, meta, schema, reports, chat. Use a comma, colon, period or parentheses.
 - **Copy in Andru's voice.** Anything written for the site or the client (meta titles and descriptions, FAQ rewrites, the client summary) is drafted with the `andru-voice` skill and goes on the approval list, never straight onto the site.
+- **Light and smooth is part of done.** A site that scores 100 on Lighthouse can still stutter when a pixel, a chat widget or a video starts mid-scroll. Treat a slow frame like a console error: find what caused it and fix it (checks I11 to I19).
 - **Andru often works over Remote Control.** Put every question and its choices in plain text in the message, numbered, with a recommended answer, so he can reply "1 yes, 2 b".
 
 ## 0. Which phase
@@ -80,10 +81,11 @@ Run the scripts, then do the parts only judgment can do. The scripts produce *ca
 | a. Repo | `bash qa/tools/repo-hygiene.sh` | A1 to A12 |
 | b. Crawl (no JavaScript) | `node qa/tools/seo-audit.mjs --origin <preview> --prod https://<domain>` | C1, C3, C5, C8, E1 to E18, G1, G6, G9, I5 to I8, J8 |
 | c. Structured data | `node qa/tools/schema-check.mjs` | F1 to F10 |
-| d. Browser | `node qa/tools/scan.mjs qa/urls.txt` | B1 to B18, I6, I7, J1, J3, J5, K1 |
+| d. Browser | `node qa/tools/scan.mjs qa/urls.txt` | B1 to B19, I6, I7, J1, J3, J5, K1 |
 | e. Lighthouse | `node qa/tools/lighthouse.mjs qa/key-pages.txt --runs 3` | I1 to I4, I10 |
 | f. Sanity | from the folder with `sanity.cli.ts`: `npx sanity exec <repo>/qa/tools/sanity-audit.mjs --with-user-token`, then `npx sanity documents validate -y` | D1 to D6, D9, D10 |
 | g. Old URLs | `node qa/tools/plumbing.mjs --base <preview> --old-urls qa/old-urls.txt` (and `--map qa/redirect-map.json` once a map exists) | E10 |
+| h. Smoothness and weight | `node qa/tools/smoothness.mjs qa/key-pages.txt` (a Chrome window opens; leave it uncovered). Tracking only loads on the production domain, so before launch also build with the production env and run `node qa/tools/smoothness.mjs https://<domain>/ --serve <built folder> --as https://<domain>` for the home page and one page with video. Read `qa/smoothness-summary.md`: every slow frame lists what happened at that moment | I11 to I19 |
 
 Then, by hand:
 
@@ -145,7 +147,7 @@ Commit the reports and state on the branch. Then close in chat with: the verdict
 
 ## 9. Launch day
 
-Follow [references/launch-day.md](references/launch-day.md): domain, SSL, redirects, canonicals, sitemap, robots, noindex removed, schema, analytics, Lighthouse on production through PageSpeed Insights, then walk Andru through Search Console and Bing Webmaster Tools submissions. Update the state and append to the report.
+Follow [references/launch-day.md](references/launch-day.md): domain, SSL, redirects, canonicals, sitemap, robots, noindex removed, schema, analytics, Lighthouse on production through PageSpeed Insights, smoothness with the real tracking loaded, then walk Andru through Search Console and Bing Webmaster Tools submissions. Update the state and append to the report.
 
 ## 10. Two-week check
 

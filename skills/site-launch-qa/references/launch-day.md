@@ -37,6 +37,14 @@ node qa/tools/lighthouse.mjs qa/key-pages.txt --psi --runs 3
 
 PageSpeed Insights runs on Google's servers against the live CDN, so this is the score of record. Expect production to differ from the preview where tracking only loads in production (analytics, ad pixels): compare the two tables and name the script behind any drop. If the PSI quota is used up and there is no `PSI_API_KEY`, use local Lighthouse and say so in the report.
 
+Then scroll every key page with the real tracking, chat and analytics loaded (production is the first place they all run together):
+
+```bash
+node qa/tools/smoothness.mjs qa/key-pages.txt --ad-paths /go
+```
+
+A Chrome window opens; leave it uncovered. The script blocks the reporting beacons (Meta, GoHighLevel, GA4, Vercel), so no fake visits land in the client's data. Gate: no frame over 12.5ms while scrolling on a 120Hz screen (I11), and no third-party JS before the first scroll pause outside the ad pages (I14). Compare with the pre-launch table; a new slow frame on production almost always names a third-party script.
+
 ## 6. Walk Andru through submissions
 
 These need his Google and Microsoft logins, so he does them; give him numbered steps in plain text:

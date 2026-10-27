@@ -62,6 +62,7 @@ The checklist of record for `site-launch-qa`. Every finding in a report uses an 
 | B16 | Every CTA and button goes where intended; no empty or `#` links | B | Pre | Auto when the target is unambiguous |
 | B17 | Forms: required fields, validation messages, success and error states | B | Pre | Ask |
 | B18 | Zero console errors and zero failed same-site requests on every page | H, gates launch | Pre, Day | Auto when mechanical |
+| B19 | Sideways scroll frames (wide tables, diagrams) have `position: relative`, so absolutely positioned bits inside them (screen reader text) don't widen the page on a phone; a frame that is cut off shows it swipes (a fade at the cut edge and a short "Swipe to see more" line) | H | Pre | Auto |
 
 ## C. Content
 
@@ -173,6 +174,25 @@ The checklist of record for `site-launch-qa`. Every finding in a report uses an 
 
 Ad pixels only load in production, so a preview can score 100 and production less. The Meta Pixel's third-party `fr` cookie alone caps Best Practices at about 79 and adds load time. If the client runs Meta ads, either load the pixel only on the ad landing pages or record an accepted exception in `qa/LAUNCH-QA.md`; never remove a pixel without asking, because ads depend on it.
 
+### Lightness: smooth to scroll, light to load
+
+Andru's rule: every site stays as light as possible. Lighthouse measures the first load; these checks measure what a visitor feels after that, while scrolling and while the page sits still. Run `node qa/tools/smoothness.mjs` (see SKILL.md step h). It uses real Chrome in a visible window with the GPU on, because headless Chrome and a hidden Claude Browser pane draw frames differently and their timing can't be trusted.
+
+| ID | Check | Target | Sev | Phase | Fix |
+|---|---|---|---|---|---|
+| I11 | Scrolling never stutters: wheel scroll top to bottom on every key page at 1440 and 390, with tracking loaded (production, or the local build served under the real domain) | No frame over 12.5ms while scrolling on a 120Hz screen (1.5 refreshes; 25ms on a 60Hz screen), first 5 frames left out | H, gates launch | Pre, Day | Ask |
+| I12 | Nothing heavy starts while the visitor is scrolling. Smooth scrolling (Lenis) runs on the main thread, so any long task mid-scroll freezes the page. Videos, embeds, third-party scripts and widgets start only in a scroll pause | Every slow frame in I11 blamed on its cause and fixed | H | Pre, Day | Ask |
+| I13 | Looping videos start only after a 250ms scroll pause, one at a time, 200ms apart, with the poster showing until then, and pause when off screen. Starting a video can freeze the page for 100 to 160ms | | H | Pre | Auto |
+| I14 | Third-party scripts (Meta pixel, GoHighLevel tracking, GA4, schedulers) wait for page load, at least 2.5s, a 1.5s scroll pause and browser idle. Ad landing pages (`/go` and the like) load them right away so the ad platform counts every visit | No third-party JS before the visitor's first scroll pause, except on ad pages | H | Pre, Day | Ask (ads depend on it; never remove a pixel) |
+| I15 | Chat widgets sit behind a facade: a site-drawn bubble with the same size, color, position and icon; the real widget (about 300KB) loads and opens only on click | | H | Pre | Ask |
+| I16 | Page weight budget, compressed, per key page. Third-party JS reported separately by host | Our own JS under 100KB, CSS under 75KB, fonts under 250KB, everything that loads before the first scroll under 1.5MB | H (own JS, before scroll) / P | Pre, Day | Ask |
+| I17 | No stacked copies of large images. A progressive blur copied from Framer as five full-screen layers becomes one sharp image plus one blurred, masked copy (for example blur 3px, mask `transparent 50%, rgb(0 0 0 / 0.45) 75%, black 100%`) | At most 2 copies of an image in one place | H | Pre | Auto (when the result matches within about 1/255 average pixel difference), Ask otherwise |
+| I18 | Nothing works while the page sits still: endless animations (rings, marquees, tickers) pause off screen, scroll effects stop their loop when the page stops moving | Under 20 style recalcs in 3s of idle, at the top and the bottom | H | Pre | Auto |
+| I19 | Scroll-linked effects read positions once (on load, resize and a ResizeObserver), not on every frame, and write a style only when the value changes | | P | Pre | Auto |
+
+What it looks like when it's right (andrubailey.com, Oct 27, 2026): 0 slow frames on every key page at 120Hz, our own JS about 25KB, the Meta pixel (about 270KB) and GoHighLevel tracking (about 106KB) arriving in a scroll pause, the chat as a drawn bubble, zero idle recalcs. The patterns are in `src/components/LoopVideo.astro` and `window.abWhenCalm` in `src/layouts/BaseLayout.astro` of that repo.
+
+
 ## J. Accessibility
 
 | ID | Check | Sev | Phase | Fix |
@@ -217,6 +237,7 @@ Ad pixels only load in production, so a preview can score 100 and production les
 
 - [ ] Lighthouse mobile, median of 3, every key page: Performance 95+, Accessibility 100, Best Practices 100, SEO 100 (I1, I10)
 - [ ] Zero schema errors (F1), zero broken links (E17), zero console errors (B18)
+- [ ] Smooth scrolling on every key page at 1440 and 390: no frame over 12.5ms on a 120Hz screen, with tracking loaded (I11)
 - [ ] A unique title and meta description on every indexable page (E1, E2)
 - [ ] Zero open Blocker items and zero open High items (High items the client accepted in writing count as closed; record the acceptance in `qa/LAUNCH-QA.md`)
 - [ ] Every fix re-tested on a fresh preview
