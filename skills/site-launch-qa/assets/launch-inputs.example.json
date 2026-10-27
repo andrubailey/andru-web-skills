@@ -1,0 +1,52 @@
+{
+  "_note": "Filled during intake. Each value records its source in _sources. Andru confirms this file before the audit starts.",
+  "client": "Smith Homes",
+  "site": {
+    "productionDomain": "smithhomes.com",
+    "primaryHost": "apex",
+    "preview": "https://smith-homes-git-qa-launch-2026-11-02-andrubailey.vercel.app",
+    "vercelProject": "smith-homes",
+    "repo": "~/Sites/smith-homes",
+    "oldSite": "https://www.smithhomesga.com",
+    "designFile": "Paper: Smith Homes v1"
+  },
+  "sanity": { "projectId": "", "dataset": "production", "studio": "https://smith-homes.sanity.studio" },
+  "blueprint": { "source": "~/Sites/andrubailey-astro-blueprints/src/blueprints/smith-homes.ts", "date": "2026-10-14" },
+  "schemaType": "GeneralContractor",
+  "business": {
+    "name": "Smith Homes",
+    "legalName": "Smith Homes LLC",
+    "phone": "+1-770-000-0000",
+    "email": "office@smithhomes.com",
+    "address": { "street": "", "city": "Jefferson", "region": "GA", "postal": "30549" },
+    "serviceAreaBusiness": false,
+    "geo": { "lat": null, "lng": null },
+    "hours": "Mon to Fri 8:00 to 17:00",
+    "founder": { "name": "Jim Smith", "title": "Founder and builder", "linkedin": "" },
+    "foundingYear": null,
+    "license": null,
+    "associations": [],
+    "sameAs": [],
+    "gbpUrl": "",
+    "gbpReviewUrl": ""
+  },
+  "serviceAreas": [
+    { "name": "Jackson County", "type": "county", "state": "GA", "priority": 1, "page": "/areas/jackson-county" },
+    { "name": "Lake Lanier", "type": "place", "state": "GA", "priority": 1, "page": "/areas/lake-lanier" }
+  ],
+  "homeTypes": ["lake homes", "modern farmhouse"],
+  "buyer": "",
+  "priorities": [],
+  "competitors": [{ "name": "", "url": "" }],
+  "targetSearches": ["custom home builder Jackson County GA", "Lake Lanier home builder"],
+  "forms": [{ "page": "/contact", "tool": "", "destination": "", "conversion": "thank-you page /thanks" }],
+  "analytics": { "ga4Id": "", "searchConsole": "domain property, not yet verified", "bing": "not set up" },
+  "aiCrawlerPolicy": "allow-all",
+  "llmsTxt": true,
+  "keyPages": ["/", "/about", "/contact", "/process", "/homes/<one>", "/areas/<one>"],
+  "outOfScope": [],
+  "_sources": {
+    "serviceAreas": "blueprint quick win 3 and channels.Google Business Profile",
+    "business.phone": "Sanity siteSettings"
+  }
+}

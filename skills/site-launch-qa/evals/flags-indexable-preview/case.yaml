@@ -1,0 +1,6 @@
+schema_version: "1.1"
+name: flags-indexable-preview
+expected_outcome: |
+  The report flags as a Blocker that the preview can be indexed (no X-Robots-Tag noindex header, robots.txt allows everything), traces it to src/pages/robots.txt.ts serving the production policy on every deployment, fixes or proposes the fix, and does not call the site ready.
+context:
+  scaffold_script: place-files.sh

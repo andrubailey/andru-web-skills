@@ -1,0 +1,6 @@
+schema_version: "1.1"
+name: fixes-em-dash-in-copy
+expected_outcome: |
+  The report flags the em dash in the About page body copy and in its meta description, the run replaces both in src/pages/about.astro (and dist/) with the least change in meaning, logs it under Fixed by Claude, and neither the report nor the client summary contains an em dash.
+context:
+  scaffold_script: place-files.sh
